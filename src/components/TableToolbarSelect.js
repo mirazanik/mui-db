@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@material-ui/icons/AddShoppingCart';
 import { withStyles } from '@material-ui/core/styles';
 import MuiTooltip from '@material-ui/core/Tooltip';
 

@@ -30,9 +30,9 @@ const getTextLabels = () => ({
     titleAria: 'Show/Hide Table Columns',
   },
   selectedRows: {
-    text: 'row(s) selected',
-    delete: 'Delete',
-    deleteAria: 'Delete Selected Rows',
+    text: 'Add to Cart',
+    delete: 'Add to Cart',
+    deleteAria: 'Add to Cart Selected Rows',
   },
 });
 
