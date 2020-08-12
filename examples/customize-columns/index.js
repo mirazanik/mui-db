@@ -8,57 +8,58 @@ class Example extends React.Component {
 
     const columns = [
       {
-        name: "Name",
+        name: 'Name',
         options: {
           filter: true,
           //display: 'excluded',
           sortThirdClickReset: true,
           sortDescFirst: true,
-        }
-      },      
+        },
+      },
       {
-        label: "Modified Title Label",
-        name: "Title",
+        label: 'Modified Title Label',
+        name: 'Title',
         options: {
           filter: true,
           sortThirdClickReset: true,
-        }
+        },
       },
       {
-        name: "Location",
+        name: 'Location', //anik
         options: {
+          display: 'false', //anik
           filter: false,
-          sortThirdClickReset: true,
+          sortThirdClickReset: true, //anik
           customHeadRender: (columnMeta, updateDirection) => (
             <th key={2} onClick={() => updateDirection(2)} style={{ cursor: 'pointer' }}>
               {columnMeta.name}
             </th>
-          )
-        }
+          ),
+        },
       },
       {
-        name: "Age",
+        name: 'Age',
         options: {
           filter: true,
           sortThirdClickReset: true,
-        }
+        },
       },
       {
-        name: "Salary",
+        name: 'Salary',
         options: {
           filter: true,
           sort: true,
           sortThirdClickReset: true,
           sortDescFirst: true,
-          sortCompare: (order) => {
+          sortCompare: order => {
             return (obj1, obj2) => {
-              var val1 = parseInt(obj1.data.substr(1).replace(/,/g,''), 10);
-              var val2 = parseInt(obj2.data.substr(1).replace(/,/g,''), 10);
+              var val1 = parseInt(obj1.data.substr(1).replace(/,/g, ''), 10);
+              var val2 = parseInt(obj2.data.substr(1).replace(/,/g, ''), 10);
               return (val1 - val2) * (order === 'asc' ? 1 : -1);
             };
-          }
-        }
-      }      
+          },
+        },
+      },
     ];
 
 

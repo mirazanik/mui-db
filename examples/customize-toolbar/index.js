@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MUIDataTable from '../../src/';
 import CustomToolbar from './CustomToolbar';
-
+import CustomToolbarSelect from './CustomToolbarSelect';
 class Example extends React.Component {
   constructor(props) {
     super(props);
@@ -54,6 +54,9 @@ class Example extends React.Component {
       customToolbar: () => {
         return <CustomToolbar muiDataTable={this.muiDataTableRef} ref={this.customToolbarRef} />;
       },
+      customToolbarSelect: (selectedRows, displayData, setSelectedRows) => (
+        <CustomToolbarSelect selectedRows={selectedRows} displayData={displayData} setSelectedRows={setSelectedRows} />
+      ),
     };
 
     return (

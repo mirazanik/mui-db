@@ -1477,12 +1477,75 @@ class MUIDataTable extends React.Component {
     );
   };
 
-  selectRowDelete = () => {
+  checkDuplicate = item => {
+    for (let i = 0; i < this.state.cartItems.length; i++) {
+      var result = true;
+      for (let j = 0; j < item.length; j++) {
+        console.log(this.state.cartItems[i]);
+        console.log(this.state.cartItems[j]);
+        if (this.state.cartItems[i][j] !== item[j]) {
+          result = false;
+          break;
+        }
+        
+      }
+      if (result === true) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  addOnlyUnique = item => {
+    if (this.state.cartItems.findIndex(this.checkDuplicate) === -1) {
+      this.state.cartItems.push(item);
+    }
+  };
+
+  addToCart = () => {
     const { selectedRows, data, filterList } = this.state;
 
     const selectedMap = buildMap(selectedRows.data);
     const cleanRows = data.filter(({ index }) => selectedMap[index]);
+    const cleanRows2 = data.filter(({ index }) => !selectedMap[index]);
+
+    //cleanRows.map(x => this.addOnlyUnique(x));
     cleanRows.map(x => this.state.cartItems.push(x));
+    
+
+    if (this.options.onRowsDelete) {
+      if (
+        this.options.onRowsDelete(
+          selectedRows,
+          cleanRows2.map(ii => ii.data),
+        ) === false
+      )
+        return;
+    }
+
+    this.setTableData(
+      {
+        columns: this.props.columns,
+        data: cleanRows2,
+        options: {
+          filterList: filterList,
+        },
+      },
+      TABLE_LOAD.UPDATE,
+      true,
+      () => {
+        this.setTableAction('rowDelete');
+      },
+    );
+  };
+
+  selectRowDelete = () => {
+    const { selectedRows, data, filterList } = this.state;
+
+    const selectedMap = buildMap(selectedRows.data);
+    const cleanRows = data.filter(({ index }) => !selectedMap[index]);
+
     if (this.options.onRowsDelete) {
       if (
         this.options.onRowsDelete(
@@ -1496,7 +1559,7 @@ class MUIDataTable extends React.Component {
     this.setTableData(
       {
         columns: this.props.columns,
-        data: data,
+        data: cleanRows,
         options: {
           filterList: filterList,
         },

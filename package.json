@@ -1,6 +1,6 @@
 {
   "name": "mui-datatables_select_save",
-  "version": "3.3.2",
+  "version": "3.3.10",
   "description": "Datatables for React using Material-UI",
   "main": "dist/index.js",
   "files": [
