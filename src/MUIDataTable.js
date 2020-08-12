@@ -1480,14 +1480,11 @@ class MUIDataTable extends React.Component {
   checkDuplicate = item => {
     for (let i = 0; i < this.state.cartItems.length; i++) {
       var result = true;
-      for (let j = 0; j < item.length; j++) {
-        console.log(this.state.cartItems[i]);
-        console.log(this.state.cartItems[j]);
-        if (this.state.cartItems[i][j] !== item[j]) {
+      for (let j = 0; j < item.data.length; j++) {
+        if (this.state.cartItems[i].data[j] !== item.data[j]) {
           result = false;
           break;
         }
-        
       }
       if (result === true) {
         return true;
@@ -1498,7 +1495,11 @@ class MUIDataTable extends React.Component {
   };
 
   addOnlyUnique = item => {
-    if (this.state.cartItems.findIndex(this.checkDuplicate) === -1) {
+    if (this.state.cartItems.length === 0) {
+      this.state.cartItems.push(item);
+      return;
+    }
+    if (this.state.cartItems.findIndex(() => this.checkDuplicate(item)) === -1) {
       this.state.cartItems.push(item);
     }
   };
@@ -1510,9 +1511,8 @@ class MUIDataTable extends React.Component {
     const cleanRows = data.filter(({ index }) => selectedMap[index]);
     const cleanRows2 = data.filter(({ index }) => !selectedMap[index]);
 
-    //cleanRows.map(x => this.addOnlyUnique(x));
-    cleanRows.map(x => this.state.cartItems.push(x));
-    
+    cleanRows.map(x => this.addOnlyUnique(x));
+    //cleanRows.map(x => this.state.cartItems.push(x));
 
     if (this.options.onRowsDelete) {
       if (

@@ -5,7 +5,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/AddShoppingCart';
 import BlockIcon from '@material-ui/icons/Delete';
 import { withStyles } from '@material-ui/core/styles';
-
+import { buildMap, getCollatorComparator, sortCompare, getPageValue, warnDeprecated, warnInfo } from '../../src/utils';
+const TABLE_LOAD = {
+  INITIAL: 1,
+  UPDATE: 2,
+};
 const defaultToolbarSelectStyles = {
   iconButton: {},
   iconContainer: {
@@ -30,11 +34,11 @@ class CustomToolbarSelect extends React.Component {
   };
 
   handleClickAddToCart = () => {
-    this.props.setSelectedRows([]);
+    this.props.muiDataTable.current.addToCart();
   };
 
   handleClickDeleteSelectd = () => {
-    console.log(`block users with dataIndexes: ${this.props.selectedRows.data.map(row => row.dataIndex)}`);
+    this.props.muiDataTable.current.selectRowDelete();
   };
 
   render() {
@@ -42,7 +46,7 @@ class CustomToolbarSelect extends React.Component {
 
     return (
       <div className={classes.iconContainer}>
-        <Tooltip title={'Deselect ALL'}>
+        <Tooltip title={'Add to Cart'}>
           <IconButton className={classes.iconButton} onClick={this.handleClickAddToCart}>
             <IndeterminateCheckBoxIcon className={classes.icon} />
           </IconButton>

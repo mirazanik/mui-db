@@ -55,7 +55,12 @@ class Example extends React.Component {
         return <CustomToolbar muiDataTable={this.muiDataTableRef} ref={this.customToolbarRef} />;
       },
       customToolbarSelect: (selectedRows, displayData, setSelectedRows) => (
-        <CustomToolbarSelect selectedRows={selectedRows} displayData={displayData} setSelectedRows={setSelectedRows} />
+        <CustomToolbarSelect
+          muiDataTable={this.muiDataTableRef}
+          selectedRows={selectedRows}
+          displayData={displayData}
+          setSelectedRows={setSelectedRows}
+        />
       ),
     };
 
