@@ -308,6 +308,9 @@ class TableToolbar extends React.Component {
 
     return (
       <Toolbar
+        style={{
+          border: '0.1px solid rgb(224 224 224)',
+        }}
         className={options.responsive !== RESPONSIVE_FULL_WIDTH_NAME ? classes.root : classes.fullWidthRoot}
         role={'toolbar'}
         aria-label={'Table Toolbar'}>

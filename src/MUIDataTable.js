@@ -1527,7 +1527,7 @@ class MUIDataTable extends React.Component {
     this.setTableData(
       {
         columns: this.props.columns,
-        data: cleanRows2,
+        data: data,
         options: {
           filterList: filterList,
         },
@@ -1925,7 +1925,7 @@ class MUIDataTable extends React.Component {
           <TableToolbarSelectComponent
             options={this.options}
             selectedRows={selectedRows}
-            onRowsDelete={this.selectRowDelete}
+            onRowsDelete={this.addToCart}
             displayData={displayData}
             selectRowUpdate={this.selectRowUpdate}
             components={this.props.components}
